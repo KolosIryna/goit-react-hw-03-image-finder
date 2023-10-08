@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { StyledForm } from './Searchbar.styled';
+import { StyledForm, StyledHeader } from './Searchbar.styled';
 
 export const Searchbar = ({ onSubmit }) => {
   const schema = Yup.object({
@@ -11,7 +11,7 @@ export const Searchbar = ({ onSubmit }) => {
         /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
         'Please enter a valid title'
       )
-      .max(10)
+      .max(18)
       .required(),
   }).required();
 
@@ -22,7 +22,7 @@ export const Searchbar = ({ onSubmit }) => {
   };
 
   return (
-    <header>
+    <StyledHeader>
       <Formik
         initialValues={{ title: '' }}
         onSubmit={handleSubmit}
@@ -43,6 +43,6 @@ export const Searchbar = ({ onSubmit }) => {
           />
         </StyledForm>
       </Formik>
-    </header>
+    </StyledHeader>
   );
 };

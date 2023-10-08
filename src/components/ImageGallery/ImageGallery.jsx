@@ -7,7 +7,7 @@ import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Loader } from '../Loader/Loader';
 import { StyledImageGallery } from './ImageGallery.styled';
 
-export class ImageGalery extends Component {
+export class ImageGallery extends Component {
   state = {
     images: null,
     isLoading: false,

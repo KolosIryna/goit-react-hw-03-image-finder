@@ -1,8 +1,7 @@
 import { Component } from 'react';
 
 import { Searchbar } from './Searchbar/Searchbar';
-import { ImageGalery } from './ImageGallery/ImageGallery';
-// import { Modal } from './Modal/Modal';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 import { StyledAppContainer } from './App.styled';
 
@@ -25,7 +24,7 @@ export class App extends Component {
     return (
       <StyledAppContainer>
         <Searchbar onSearch={this.handleSearch} />
-        {hasSearched && <ImageGalery searchQuery={searchQuery} />}
+        {hasSearched && <ImageGallery searchQuery={searchQuery} />}
       </StyledAppContainer>
     );
   }
