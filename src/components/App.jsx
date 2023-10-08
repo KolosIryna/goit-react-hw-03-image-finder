@@ -7,12 +7,25 @@ import { ImageGalery } from './ImageGallery/ImageGallery';
 import { StyledAppContainer } from './App.styled';
 
 export class App extends Component {
+  state = {
+    searchQuery: '',
+    hasSearched: false,
+  };
+
+  handleSearch = query => {
+    this.setState({
+      searchQuery: query,
+      hasSearched: true,
+    });
+  };
+
   render() {
+    const { searchQuery, hasSearched } = this.state;
+
     return (
       <StyledAppContainer>
-        <Searchbar />
-        <ImageGalery />
-        {/* {this.state.modal.isOpen && <Modal img={this.state.modal.img/>} */}
+        <Searchbar onSearch={this.handleSearch} />
+        {hasSearched && <ImageGalery searchQuery={searchQuery} />}
       </StyledAppContainer>
     );
   }

@@ -16,6 +16,7 @@ export const Searchbar = ({ onSubmit }) => {
   }).required();
 
   const handleSubmit = (values, actions) => {
+    values.preventDefault();
     onSubmit(values.title);
     actions.resetForm();
   };
