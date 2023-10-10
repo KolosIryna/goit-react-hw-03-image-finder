@@ -1,24 +1,23 @@
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 
 import { StyledForm, StyledHeader } from './Searchbar.styled';
 
-export const Searchbar = ({ onSubmit }) => {
-  const schema = Yup.object({
-    title: Yup.string()
-      .min(2)
-      .matches(
-        /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-        'Please enter a valid title'
-      )
-      .max(18)
-      .required(),
-  }).required();
+const schema = Yup.object({
+  title: Yup.string()
+    .min(2)
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      'Please enter a valid title'
+    )
+    .max(18)
+    .required(),
+}).required();
 
+export const Searchbar = ({ onSearch }) => {
   const handleSubmit = (values, actions) => {
-    values.preventDefault();
-    onSubmit(values.title);
-    actions.resetForm();
+    onSearch(values.title);
+    // actions.resetForm();
   };
 
   return (
@@ -33,10 +32,9 @@ export const Searchbar = ({ onSubmit }) => {
             <span className="button-label">Search</span>
           </button>
 
-          <input
+          <Field
             className="input"
             name="title"
-            type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
