@@ -17,6 +17,7 @@ export class App extends Component {
     isLoading: false,
     error: null,
     page: 1,
+    totalImages: 0,
     modal: {
       isModalOpen: false,
       modalImageUrl: '',
@@ -28,6 +29,7 @@ export class App extends Component {
       searchQuery: query,
       page: 1,
       images: [],
+      totalImages: 0,
     });
   };
 
@@ -37,11 +39,12 @@ export class App extends Component {
     try {
       this.setState({ isLoading: true });
 
-      const images = await getImage(searchQuery, page);
-      if (!images.length) return;
+      const data = await getImage(searchQuery, page);
+      if (!data.hits.length) return;
 
       this.setState(prevState => ({
-        images: [...prevState.images, ...images],
+        images: [...prevState.images, ...data.hits],
+        totalImages: data.totalHits,
       }));
     } catch (error) {
       this.setState({ error: error.message });
@@ -80,7 +83,7 @@ export class App extends Component {
   };
 
   render() {
-    const { images, isLoading, error, modal } = this.state;
+    const { images, isLoading, error, modal, totalImages } = this.state;
 
     return (
       <StyledAppContainer>
@@ -93,7 +96,9 @@ export class App extends Component {
           imageUrl={modal.modalImageUrl}
           onCloseModal={this.onCloseModal}
         />
-        {this.state.page > 1 && <Button onClick={this.loadMore} />}
+        {images.length !== totalImages && !isLoading && (
+          <Button onClick={this.loadMore} />
+        )}
         {isLoading && <Loader />}
         {error && <p>{error}</p>}
       </StyledAppContainer>

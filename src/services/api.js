@@ -8,7 +8,7 @@ export const getImage = async (value, page) => {
     const { data } = await axios.get(
       `${BASE_URL}?q=${value}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
     );
-    return data.hits;
+    return data;
   } catch (error) {
     throw new Error('Ooops Error');
   }
